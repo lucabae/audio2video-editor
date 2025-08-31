@@ -5,6 +5,11 @@
   This eliminates the need to manually search for and insert images into your videos.
 </p>
 
+<h2>LICENSE</h2>
+<p>
+This project is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License (CC BY-NC-ND 4.0)](LICENSE).
+Modifications are only allowed if contributed directly back to the original repository via a Pull Request. Commercial use is strictly prohibited.
+</p>
 <h2>HOW IT WORKS</h2>
 <p>
   1. When an audio file is uploaded, a <strong>Whisper</strong> model transcribes the audio with timestamps using 
