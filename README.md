@@ -7,7 +7,7 @@
 
 <h2>LICENSE</h2>
 <p>
-This project is licensed under the [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License (CC BY-NC-ND 4.0)](LICENSE).
+This project is licensed under the <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode" target='_blank'>Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License (CC BY-NC-ND 4.0)</a>.
 Modifications are only allowed if contributed directly back to the original repository via a Pull Request. Commercial use is strictly prohibited.
 </p>
 <h2>HOW IT WORKS</h2>
