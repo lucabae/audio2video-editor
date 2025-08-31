@@ -17,6 +17,43 @@
   4. The entire process is automatic; only the audio upload is required.
 </p>
 
+<h2>INSTALLATION</h2>
+
+<ol>
+  <li>
+    <strong>Clone the repository:</strong><br>
+    <code>git clone https://github.com/lucabae/video-editor</code><br>
+    <code>cd video-editor</code>
+  </li>
+
+  <li>
+    <strong>Set up a virtual environment (recommended):</strong><br>
+    It is highly recommended to use <strong>Python 3.9</strong> for compatibility.<br>
+    <code>python3.9 -m venv venv</code><br>
+    Linux/macOS:
+    <code>source venv/bin/activate</code><br>
+    Windows:
+    <code>venv\Scripts\activate</code> &nbsp; 
+  </li>
+
+  <li>
+    <strong>Install backend dependencies:</strong><br>
+    <code>pip install -r backend/requirements.txt</code>
+  </li>
+
+  <li>
+    <strong>Run the backend server:</strong><br>
+    <code>cd backend</code><br>
+    <code>python server.py</code><br>
+    The Flask server will start, usually at <code>http://127.0.0.1:8000</code>
+  </li>
+  
+  <li>
+    <strong>Open the frontend:</strong><br>
+    Open <code>frontend/index.html</code> in your browser to start using the editor.
+  </li>
+</ol>
+
 <h2>HOW TO USE</h2>
 <p>
   1. Select an audio file in the top-left corner.<br>
@@ -30,7 +67,8 @@
 <p>
   After clips are generated, you can freely modify your video.
 </p>
-
+<img src="./videoEditor.png"/>
+<img src="./clipButtons.png"/>
 <h3>Available Features</h3>
 <ul>
   <li><strong>Video Effects:</strong> Apply effects to individual clips or all clips.</li>
