@@ -1,0 +1,7 @@
+projects
+.vscode
+*.m4a 
+*.mp3
+*.mp4
+venv
+.DS_Store

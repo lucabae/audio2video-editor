@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Video Editor</title>
+    <script src="script.js" defer></script>
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <h1 id="title">Video Editor</h1>
+
+    <!-- clip component -->
+        <div id="clip" class="clip" style="display:none;">
+        <div class="clipPreview">
+            <img
+            src=""
+            id="clip0image"
+            />
+        </div>
+        <p class="imageDescription">Image Description</p>
+
+        <span>
+          <img src="icons/clipTiming.svg" alt="Clip start time">
+          <p class="clipTiming">
+          </p>
+        </span>
+
+        
+
+        <div class="buttonsContainer">
+          <button class="createClipButton" onclick="createClip(0)">Add new clip</button>
+          <button class="changeClipTimeButton" onclick="changeClipTime(0)">Change clip start time</button>
+          <button class="showImageOptionsButton" onclick="showImageOptions(0)">Show other image options</button>
+          <button class="changeImageDescriptionButton" onclick="changeImageDescription(0)">Generate new image</button>
+          <button class="replaceImageButton" onclick="replaceImage(0)">Enter new image link</button>
+          <button class="goToButton" onclick="goTo(0)">Go to clip in audio</button>
+          <button class="convertToYTButton" onclick="convertToYT(0)" >Enter a YouTube video link</button>
+          <a class="convertToYTLink" target="_blank"><img src="icons/convertToYTLink.svg" alt="Search YouTube video"> Search YouTube video</a>
+          <button class="removeClipButton">Remove clip</button>
+        </div>
+
+        <h3 class="fxTitle">Clip Effects</h3>
+        <form class="fxForm">
+        </form>
+      </div>
+    <!--  -->
+
+    
+
+    <div id="editorButtonsContainer">
+      <input
+      type="file"
+      accept="audio/*"
+      name="audio"
+      id="audioInput"
+      placeholder="Input audio file"
+      />
+      <audio id="audioPlayer" controls></audio>
+      <button onclick="transcribe()" id="transcribeButton">
+        Transcribe audio and generate images
+      </button>
+      
+      <button onclick="exportVideo()">Export</button>
+      <button onclick="retrieveClips()">Import clips from Local Storage</button>
+
+      <div class="dropdown">
+        <button onclick="generalFxDropdownToggle()" class="dropdownButton">Apply effects to all clips</button>
+        <div id="fxDropdown" class="dropdownContent">
+        </div>
+      </div>
+    </div>
+    
+    <div id="clipsContainer">
+      <h2 style="text-align: center; color: gray">
+        Upload an audio to start editing!
+      </h2>
+    </div>
+    
+
+    <div id="imagePicker"></div>
+  </body>
+</html>

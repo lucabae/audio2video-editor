@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+*{
+    font-family: "Montserrat", sans-serif;
+}
+body{
+    margin: 0;
+    overflow-x: hidden;
+}
+#title{
+    text-align: center;
+}
+
+#editorButtonsContainer {
+    display: flex;
+    align-items: center;
+    gap: 2%;
+    display: flex;
+}
+
+#editorButtonsContainer > button {
+    background: black;
+    border-radius: 5px;
+    border: none;
+    color:white;
+}
+
+#editorButtonsContainer > button:hover {
+    cursor: pointer;
+}
+
+#clipsContainer {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100vw;
+  scroll-behavior: smooth; /* opcional, efecto suave */
+  gap: 12px; /* espacio entre items */
+  padding: 10px 0 20px 0;
+}
+
+.clip{
+    flex: 0 0 300px;  /* ancho fijo tipo carrusel */
+}
+.clipPreview{
+    aspect-ratio: 16/9;
+    border: solid 2px grey;
+    background: black;
+    border-radius: 5px;
+    transition: 0.5s;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.clipPreview > img {
+    height: 100%;
+    margin: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
+.buttonsContainer{
+    height: calc(40px*9.5);
+}
+.buttonsContainer > *{
+    background: black;
+    color:white;
+    font-size: 1rem;
+    text-align: center;
+    border: solid 1px white;
+    border-radius: 5px;
+    transition: 0.5s;
+    text-decoration: none;
+    width: 100%;
+    height: 40px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    transition: 0.5s;
+}
+.buttonsContainer > * > img {
+    margin-right: 5px;
+    margin-left: 5px;
+    height: 100%;
+}
+.buttonsContainer > *:hover{
+    background: grey;
+    cursor: pointer;
+}
+
+.clip > p {
+    text-align: center;
+    height: 40px;
+}
+.clip > p:last-of-type{
+    color:rgb(60, 60, 60);
+}
+.createClipButton{
+    background: green !important;
+}
+.removeClipButton{
+    background: red !important;
+}
+.imageDescription{
+    text-decoration: underline;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.clip > span{
+    display: flex; margin: auto; width: fit-content;
+}
+
+
+#imagePicker{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 90vw;
+    margin: auto;
+    padding: 2%;
+    gap:2%;
+}
+#imagePicker > img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: contain;
+    border: solid 1px black;
+    border-radius: 5px;
+    transition: 0.5s;
+}
+
+#imagePicker > img:hover{
+    cursor: pointer;
+    filter: grayscale(50%);
+    transform: scale(1.05);
+}
+
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  background: black;
+  border-radius: 5px;
+  color:white;
+  border: none;
+}
+
+.dropdownContent {
+  display: none;
+  position: absolute;
+  background: black;
+  min-width: 160px;
+  z-index: 1;
+  flex: none;
+  border-radius: 5px;
+}
+
+.dropdownContent button {
+  color: white;
+  text-decoration: none;
+  border: none;
+  margin: 5px;
+  display: block;
+  background: inherit;
+  border-radius: inherit;
+}
+.dropdown > button{
+    background: inherit;
+    color: inherit;
+    border-radius: inherit;
+    border: inherit;
+}
+
+.dropdownContent button:hover {background-color: grey; cursor: pointer;}
+
+.show {display:block;}
+
+.fxForm{
+    display: block;
+}
+.fxForm > div{
+    display: flex;
+    margin: auto;
+    align-items: center;
+    height: 30px;
+    text-transform: capitalize;
+}
+.fxForm > div > img{
+    height: 100%;
+}
+.fxTitle{
+    font-weight: bold;
+    color: rgb(45, 45, 45);
+    text-decoration: underline;
+    margin-bottom: 0;
+    display: block;
+}

@@ -1,0 +1,12 @@
+flask
+Flask-Caching
+flask_cors
+selenium
+requests
+openai-whisper
+whisper-timestamped
+ollama
+moviepy
+pillow<10
+pytube
+pytubefix
