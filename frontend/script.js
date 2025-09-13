@@ -68,19 +68,32 @@ async function loadImages(specificClip=null){
     for (let index = startIndex; index < endIndex; index++) {
       const imageDescription = clips[index]['imageDescription']
 
-      var imageLink;
-      if(clips[index]['imageLink'] == undefined){
-        imageLink = await getImageLinks(imageDescription, 1)
-        imageLink = imageLink[0]
+      if(imageDescription != null){
+        var imageLink;
+        if(clips[index]['imageLink'] == undefined){
+          imageLink = await getImageLinks(imageDescription, 1)
+          imageLink = imageLink[0]
+        } else {
+          imageLink = clips[index]['imageLink']
+        }
+        const clipImg = document.getElementById(`clip${index}`).querySelector(".clipPreview").children[0]
+        clipImg.src = imageLink
+        clipImg.id = `clip${index}image`
+  
+        // assign image link to clip
+        clips[index]['imageLink'] = imageLink
       } else {
-        imageLink = clips[index]['imageLink']
+        const clipPreview = document.getElementById(`clip${index}`).querySelector('.clipPreview')
+        var YTvideoLink = new URL(clips[index]["YTvideoLink"])
+        YTvideoLink = new URL(`https://www.youtube.com/embed/${YTvideoLink.searchParams.get('v')}`)
+        YTvideoLink.searchParams.append('start', clips[index]["YTstart"]);
+        // create the iframe
+        clipPreview.innerHTML = ''
+        let iframe = document.createElement('iframe')
+        iframe.setAttribute('src', YTvideoLink.toString())
+        clipPreview.appendChild(iframe)
       }
-      const clipImg = document.getElementById(`clip${index}`).querySelector(".clipPreview").children[0]
-      clipImg.src = imageLink
-      clipImg.id = `clip${index}image`
 
-      // assign image link to clip
-      clips[index]['imageLink'] = imageLink
     }
     saveClips()
 }

@@ -86,7 +86,7 @@ Generate a concise summary of this text in one paragraph
 At least {get_config("CLIPS_PER_SENTENCE")} chunk(s) per sentence.
 
 Special rules:
-- If a chunk contains a list or enumeration (names, items, numbers), split it so that each item becomes its own chunk.
+- If the text contains a list or enumeration (names, items, numbers), make multiple short chunks with each item of that enumeration
 - Keep each chunk directly tied to the original context.
 - No duplicated image/video descriptions.
 

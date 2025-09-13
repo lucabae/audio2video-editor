@@ -8,5 +8,4 @@ def youtubeDownloader(url, filename='youtubedownload.mp4', output_path="videos")
 if __name__ == '__main__':
     root = tk.Tk()
     root.withdraw()
-    path = filedialog.askdirectory(title="Choose output folder") or "videos"
-    youtubeDownloader(input("URL: "), output_path=path)
+    youtubeDownloader(input("URL: "))

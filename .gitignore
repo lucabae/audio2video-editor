@@ -6,3 +6,4 @@ projects
 venv
 .DS_Store
 *.pyc
+*.jpg

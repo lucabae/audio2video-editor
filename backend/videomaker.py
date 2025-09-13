@@ -31,7 +31,7 @@ def videomaker(project: list, audio_path: str):
                 img_link = get_google_images(clip_data.get('imageDescription'), 1)[0]
             # download image
             img_data = requests.get(img_link).content
-            img_path = f"images/{clip_data['imageDescription']}.jpg"
+            img_path = f"images/{index}.jpg"
             with open(img_path, 'wb') as handler:
                 handler.write(img_data)
             # store the location of the images in the project
@@ -47,10 +47,14 @@ def videomaker(project: list, audio_path: str):
             
             # get YTstart 
             YTstart_time = clip_data.get("YTstart")
-            
-            # create clip
-            clip = VideoFileClip(f"videos/{filename}").resized(height=1080, width=1920).without_audio().subclipped(start_time=YTstart_time, end_time=YTstart_time+duration).with_duration(duration)
-        
+            try:
+                # create clip
+                clip = VideoFileClip(f"videos/{filename}").resized(height=1080, width=1920).without_audio().subclipped(start_time=YTstart_time, end_time=YTstart_time+duration).with_duration(duration)
+            except:
+                # try re-downloading
+                os.remove(f"videos/{filename}")
+                youtubeDownloader(clip_data['YTvideoLink'], filename)
+                clip = VideoFileClip(f"videos/{filename}").resized(height=1080, width=1920).without_audio().subclipped(start_time=YTstart_time, end_time=YTstart_time+duration).with_duration(duration)
         else:
             print("Clip not recognized, skipping...")
             continue
@@ -82,7 +86,11 @@ def videomaker(project: list, audio_path: str):
             fx.append(vfx.FadeOut(0.5))
         
         # apply effects on clips
-        clip = clip.with_effects(fx)
+        try:
+            clip = clip.with_effects(fx)
+        except Exception as e:
+            print(e)
+            print(clip_data)
         clips.append(clip)
 
     video = concatenate_videoclips(clips, method='compose').with_audio(voiceover)
