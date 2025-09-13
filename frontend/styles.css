@@ -89,7 +89,7 @@ body{
 
 .clip > p {
     text-align: center;
-    height: 40px;
+    height: 100px;
 }
 .clip > p:last-of-type{
     color:rgb(60, 60, 60);

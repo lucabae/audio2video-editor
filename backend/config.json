@@ -3,5 +3,5 @@
     "OLLAMA_MODEL":"gemma3:12b",
     "WHISPER_MODEL":"base",
     "WHISPER_LANGUAGE":"es",
-    "CLIPS_PER_SENTENCE":1
+    "CLIPS_PER_SENTENCE":2
 }

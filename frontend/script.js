@@ -22,7 +22,16 @@ function retrieveClips(){
   }
 }
 
+function saveClips(){
+  localStorage.setItem("clips", JSON.stringify(clips))
+}
+
 async function createClip(clipIndex){
+  const imageDescription = prompt('Input the image description:')
+  if (imageDescription == null){
+    return;
+  }
+
   var previousClipStart = clips[clipIndex]['start'];
   var nextClipStart;
   if(clipIndex != clips.length - 1){ // if not last clip
@@ -32,15 +41,16 @@ async function createClip(clipIndex){
   }
 
 
+
   // add new clip to array
   const newClip = {
-    imageDescription:prompt('Input the image description:'),
+    imageDescription:imageDescription,
     start:(previousClipStart + nextClipStart) / 2, // in the middle
   }
   clips.splice(clipIndex + 1, 0, newClip)
 
   refreshClips()
-
+  saveClips()
 }
 
 async function loadImages(specificClip=null){
@@ -72,6 +82,7 @@ async function loadImages(specificClip=null){
       // assign image link to clip
       clips[index]['imageLink'] = imageLink
     }
+    saveClips()
 }
 
 async function refreshClips(specificClip=null){
@@ -122,17 +133,19 @@ async function refreshClips(specificClip=null){
         newClip.querySelector('span > .clipTiming').innerText = `${formattedSeconds}.${formattedMilliseconds}`
 
         // save function names
-        const buttons = ["changeClipTime", "showImageOptions", "changeImageDescription", "createClip", "replaceImage", "goTo", "convertToYT", "removeClip"]
-        // apply functions to buttons
-        for (let buttonIndex = 0; buttonIndex < buttons.length; buttonIndex++) {
-          const buttonName = buttons[buttonIndex];
-          const buttonElem = newClip.querySelector(`.${buttonName}Button`)
-          buttonElem.setAttribute("onclick", `${buttonName}(${index})`)
-          // add icon
-          const newIcon = document.createElement('img')
-          newIcon.src = `icons/${buttonName}.svg`
-          newIcon.alt = buttonName
-          buttonElem.prepend(newIcon)
+        if(specificClip == null){
+          const buttons = ["changeClipTime", "showImageOptions", "changeImageDescription", "createClip", "replaceImage", "goTo", "convertToYT", "removeClip"]
+          // apply functions to buttons
+          for (let buttonIndex = 0; buttonIndex < buttons.length; buttonIndex++) {
+            const buttonName = buttons[buttonIndex];
+            const buttonElem = newClip.querySelector(`.${buttonName}Button`)
+            buttonElem.setAttribute("onclick", `${buttonName}(${index})`)
+            // add icon
+            const newIcon = document.createElement('img')
+            newIcon.src = `icons/${buttonName}.svg`
+            newIcon.alt = buttonName
+            buttonElem.prepend(newIcon)
+          }
         }
 
         // remove change clip start button from first clip
@@ -211,6 +224,7 @@ function assignImage(imageSuggestionId, clipId){
   clips[clipId]['imageLink'] = url
   // display it
   document.getElementById(`clip${clipId}image`).src = url
+  saveClips()
 }
 
 function changeImageDescription(clipId){
@@ -220,6 +234,8 @@ function changeImageDescription(clipId){
   }
   clips[clipId]['imageDescription'] = newImageDescription
   clips[clipId]['imageLink'] = undefined
+  document.getElementById(`clip${clipId}`).querySelector(".imageDescription").innerText = newImageDescription
+  saveClips();
   loadImages(clipId)
 }
 
@@ -361,7 +377,7 @@ async function changeClipTime(clipIndex){
     alert("Can't assign clip start superior to next clip start time or inferior to previous clip start time.")
     return;
   }
-
+  saveClips()
   refreshClips(clipIndex)
 }
 
@@ -369,6 +385,7 @@ function replaceImage(clipIndex){
   const newUrl = prompt("Input the new image URL:")
   clips[clipIndex]["imageDescription"] = "Custom image"
   clips[clipIndex]["imageLink"] = newUrl
+  saveClips()
   loadImages(clipIndex);
 }
 
@@ -411,6 +428,7 @@ function convertToYT(clipIndex){
   clips[clipIndex]['YTstart'] = YTstart
   clips[clipIndex]['imageDescription'] = null
   clips[clipIndex]['imageLink'] = null
+  saveClips()
 
   // adapt YouTube link to iframe
   // add a time stamp for the iframe
@@ -488,6 +506,7 @@ function removeClip(clipIndex){
   clips.splice(clipIndex, 1);
   if(clipIndex == 0){
     clips[clipIndex]['start'] = 0
-  refreshClips();
   } 
+  saveClips()
+  refreshClips();
 }

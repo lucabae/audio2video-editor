@@ -38,11 +38,10 @@ def linkTimedTranscriptionToImages(ollama_response:list, whisper_segments:str) -
         
         # divide text in words
         words = image['transcription'].strip().split()
-        if not words:
-            res.append(new_item)
-            continue
         
         second_word = words[1] if len(words) > 1 else None
+        
+        
         
         # search first word and second word in all_words from last_index
         for i in range(last_index, len(all_words)):
@@ -57,8 +56,14 @@ def linkTimedTranscriptionToImages(ollama_response:list, whisper_segments:str) -
                     # start from position of the final word
                     last_index = i
                     break
-    
-        
+            
         res.append(new_item)
+        
+    # iterate through res to make sure no timing errors are made:
+    for index, item in enumerate(res):
+        if item['start'] == 0 and index != 0 and index != len(res) - 1:
+            prior_clip_start = res[index - 1]['start']
+            next_clip_start = res[index + 1]['start']
+            item['start'] = (prior_clip_start + next_clip_start) / 2
     
     return res

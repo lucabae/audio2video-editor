@@ -5,3 +5,4 @@ projects
 *.mp4
 venv
 .DS_Store
+*.pyc

@@ -30,11 +30,22 @@ def get_google_images(query:str, max_images:int) -> list:
     links = []
     for img in images:
         src = urllib.parse.unquote(img.get_attribute("src"))
-        if src and src.startswith("https://external-content.duckduckgo.com/iu/?u=") and len(links) < max_images:
-            links.append(src)
+        width = img.get_attribute("naturalWidth")
+        height = img.get_attribute("naturalHeight")
+
+        # Convertir a enteros si existen
+        if width and height:
+            width = int(width)
+            height = int(height)
+            
+            if src and src.startswith("https://external-content.duckduckgo.com/iu/?u=") and width >= height and len(links) < max_images:
+                links.append(src)
+                
+        if len(links) >= max_images:
+            break
 
     driver.quit()
     return links
 
 if __name__ == "__main__":
-    print(get_google_images(input("Query:"), 1))
+    print(get_google_images(input("Query:"), 12))
